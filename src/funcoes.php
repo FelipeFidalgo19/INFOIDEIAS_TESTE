@@ -132,9 +132,11 @@ class Funcoes
     
 	public function SequenciaCrescente(array $arr): boolean {
         
+        $res = array();
         $response = false;
 
-        function verificar($x,$arr){
+        function verificarSem($x,$arr){
+
             if($arr[$x] < $arr[$x+1]){
                 return true;
             }else if($arr[$x] == $arr[$x+1]){
@@ -146,13 +148,34 @@ class Funcoes
             }
         }
 
-        for($x = 0; $x <= count($arr); $x++){
-            if(verify($x, $arr) == true){
-                $response = verify($x, $arr);
+  
+
+        function verificar($x,$arr){
+       
+            if($arr[$x] < $arr[$x+1]){
+                return true;
+            }else if($arr[$x] > $arr[$x+1]){
+                unset($arr[$x]);
+            }else if($arr[$x] == $arr[$x+1]){
+                return true;
+            }else if(in_array($arr[$x], $arr)){
+                return false;
             }else{
-                $response = verify($x, $arr);
+                return false;
             }
         }
+
+        for($x = 0; $x <= count($arr); $x++){
+            if(verify($x, $arr) == true){
+                $response = true;
+                
+            }else{
+                return false;
+                $response = false;
+            }
+        }
+     
         return $response;
     }
+    
 }
