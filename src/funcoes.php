@@ -16,10 +16,8 @@ class Funcoes
      * */
     public function SeculoAno(int $ano): int {
         if ($ano == 1) return 1;
-        if ($ano > 2101 || $ano < 1) return null;
+        if ($ano < 1) return null;
         return intval(($ano - 2) / 100) + 1;
-
-        return $ano;
     }
 
     
@@ -40,7 +38,25 @@ class Funcoes
 
      * */
     public function PrimoAnterior(int $numero): int {
-        
+        $primos = array();
+
+        function verify($x){
+            for ($divisor = 2; $divisor < $x; $divisor++){
+                if ($x % $divisor == 0){
+                    return false;  
+                }
+            }
+            return true;
+        }
+
+        for($x = 0; $x <= $numero; $x++){
+            if(verify($x)==true || $x == 2){
+                array_push($primos, $x);
+            }
+        }
+            
+        $response = array_search($numero, $primos) - 1;
+        return $primos[$response];
     }
 
 
@@ -69,7 +85,12 @@ class Funcoes
 
      * */
     public function SegundoMaior(array $arr): int {
-        
+        $maior = max($arr);
+        $index = array_search($maior, $arr);
+        unset($arr[$index]);
+        $response = max($arr);
+
+        return $response;
     }
 	
 	
@@ -111,5 +132,27 @@ class Funcoes
     
 	public function SequenciaCrescente(array $arr): boolean {
         
+        $response = false;
+
+        function verificar($x,$arr){
+            if($arr[$x] < $arr[$x+1]){
+                return true;
+            }else if($arr[$x] == $arr[$x+1]){
+                return true;
+            }else if(in_array($arr[$x], $arr)){
+                return false;
+            }else{
+                return false;
+            }
+        }
+
+        for($x = 0; $x <= count($arr); $x++){
+            if(verify($x, $arr) == true){
+                $response = verify($x, $arr);
+            }else{
+                $response = verify($x, $arr);
+            }
+        }
+        return $response;
     }
 }
